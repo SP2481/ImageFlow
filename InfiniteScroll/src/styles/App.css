@@ -1,0 +1,45 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.main-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 1rem;
+  position: relative;
+}
+
+.images-container {
+  flex: 1;
+  max-width: 100%;
+}
+
+.images {
+  height: max-content;
+  width: max-content;
+}
+
+.scrollTop {
+  width: 80px;
+  height: 80px;
+  border: none;
+  border-radius: 50%;
+  background-color: rgb(0, 0, 0);
+  position: fixed;
+  bottom: 2rem;
+  right: 3rem;
+}
+
+.scrollTop:active {
+  transition: transform 0.1s ease-in-out;
+  transform: translateY(8px);
+  border: none;
+}
+
+.scrollTop img {
+  width: 4vw;
+  height: 4vh;
+  mix-blend-mode: lighten;
+}
