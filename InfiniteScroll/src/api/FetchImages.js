@@ -1,15 +1,15 @@
 export default async function FetchImages(page) {
+  console.log("function started");
   const pageNo = page;
-  const query = "art";
-  const url = await fetch(
-    `https://api.unsplash.com/search/photos?query=${query}%201&client_id=${
-      import.meta.env.VITE_PUBLIC_UNSPLASH_CLIENT_ID
-    }&page=${pageNo}`,
+  const response = await fetch(
+    `https://pixabay.com/api/?key=${
+      import.meta.env.VITE_APIKEY
+    }&image_type=photo&page=${pageNo}`,
   );
-  try {
-    const response = await url.json();
-    return response;
-  } catch (err) {
-    throw new Error("Error in fetchimages " + err);
+  if (!response.ok) {
+    throw new Error("cannot get response");
   }
+  const result = await response.json();
+  console.log(result, result.total, result.totalHits);
+  return result;
 }

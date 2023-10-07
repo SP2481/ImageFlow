@@ -7,40 +7,35 @@ import arrow from "./image/arrow-up.png";
 function App() {
   const [page, setpage] = useState(1);
   const [Data, setData] = useState([]);
-  // const [isLoading, setIsLoading] = useState(false);
   const Images = useQuery({
     queryKey: ["images", page],
     queryFn: () => FetchImages(page),
     onSuccess: (newData) => {
-      setData((prevData) => [...prevData, ...newData.results]);
+      setData((prevData) => [...prevData, ...newData.hits]);
     },
   });
-
+  console.log("images" + Images);
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   });
-
   function handleScrollTop() {
     window.scrollTo(0, 0);
   }
-
   function handleScroll() {
     const windowHeight = window.innerHeight;
     const documentHeight = document.documentElement.scrollHeight;
     const scrollTop = window.scrollY;
     if (windowHeight + scrollTop >= documentHeight - 100) {
       setpage(page + 1);
-      // setIsLoading(true);
     }
   }
   if (Images.isError) {
     throw new Error("There is error getting images");
   }
-
+  console.log(Data);
   return (
     <div className="bg-gradient-to-br from-pink-300 to-yellow-300">
       <h1 className="text-5xl font-playfair text-center ">ImageFlow</h1>
@@ -50,11 +45,11 @@ function App() {
             key={obj.id}
             className="relative overflow-hidden bg-white rounded-lg shadow-lg"
           >
-            <Link to={`https://unsplash.com/photos/${obj.id}`}>
+            <Link to={obj.pageURL}>
               <img
-                src={obj.urls.small}
-                data-src={obj.urls.full}
-                alt={obj.alt_description}
+                src={obj.webformatURL}
+                data-src={obj.largeImageURL}
+                alt={obj.tags}
                 className="object-cover object-center w-full h-full transition-transform duration-300 transform scale-200 hover:scale-105"
               />
             </Link>
