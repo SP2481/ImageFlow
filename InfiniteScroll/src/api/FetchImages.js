@@ -10,6 +10,5 @@ export default async function FetchImages(page) {
     throw new Error("cannot get response");
   }
   const result = await response.json();
-  console.log(result, result.total, result.totalHits);
   return result;
 }

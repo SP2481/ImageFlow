@@ -14,7 +14,7 @@ function App() {
       setData((prevData) => [...prevData, ...newData.hits]);
     },
   });
-  console.log("images" + Images);
+
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -35,7 +35,7 @@ function App() {
   if (Images.isError) {
     throw new Error("There is error getting images");
   }
-  console.log(Data);
+
   return (
     <div className="bg-gradient-to-br from-pink-300 to-yellow-300">
       <h1 className="text-5xl font-playfair text-center ">ImageFlow</h1>
