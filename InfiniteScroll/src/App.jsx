@@ -28,7 +28,7 @@ function App() {
     const windowHeight = window.innerHeight;
     const documentHeight = document.documentElement.scrollHeight;
     const scrollTop = window.scrollY;
-    if (windowHeight + scrollTop >= documentHeight - 100) {
+    if (windowHeight + scrollTop >= documentHeight - 1000) {
       setpage(page + 1);
     }
   }
@@ -41,16 +41,13 @@ function App() {
       <h1 className="text-5xl font-playfair text-center ">ImageFlow</h1>
       <div className="grid grid-cols-4 mt-8 sm:grid-cols-2 md:grid-cols-2 mr-4 ml-4 sm:mr-2 sm:ml-2 gap-4">
         {Data.map((obj) => (
-          <div
-            key={obj.id}
-            className="relative overflow-hidden bg-white rounded-lg shadow-lg"
-          >
+          <div key={obj.id} className="overflow-hidden bg-white rounded-lg ">
             <Link to={obj.pageURL}>
               <img
-                src={obj.webformatURL}
-                data-src={obj.largeImageURL}
+                loading="lazy"
+                src={obj.largeImageURL}
                 alt={obj.tags}
-                className="object-cover object-center w-full h-full transition-transform duration-300 transform scale-200 hover:scale-105"
+                className="object-cover  w-full h-full transition-transform duration-300 transform scale-200 hover:scale-105"
               />
             </Link>
           </div>

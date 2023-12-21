@@ -1,10 +1,11 @@
 /* eslint-disable react-refresh/only-export-components */
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import React from "react";
+import React, { Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import App from "./App.jsx";
 import "./index.css";
+
+const App = React.lazy(() => import("./App.jsx"));
 
 const queryclient = new QueryClient({
   defaultOptions: {
@@ -20,7 +21,9 @@ const Main = () => {
     <React.StrictMode>
       <BrowserRouter>
         <QueryClientProvider client={queryclient}>
-          <App />
+          <Suspense fallback={<div>...loading</div>}>
+            <App />
+          </Suspense>
         </QueryClientProvider>
       </BrowserRouter>
     </React.StrictMode>
